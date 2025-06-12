@@ -20,7 +20,23 @@ public:
         return newHead;
     }
 
+    ListNode* iterative(ListNode* head){
+        ListNode* prev = NULL;
+        ListNode* curr = head;
+        ListNode* next = NULL;
+        while(curr){
+            next = curr->next;
+            curr->next = prev;
+            prev = curr;
+            curr = next;
+        }
+
+        return prev;
+    }
+
+
     ListNode* reverseList(ListNode* head) {
-        return recursive(head);
+        // return recursive(head);
+        return iterative(head);
     }
 };
