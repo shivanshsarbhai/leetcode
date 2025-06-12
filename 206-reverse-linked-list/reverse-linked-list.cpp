@@ -14,13 +14,9 @@ public:
         if(!head || !head->next)
             return head;
 
-        ListNode* next = head->next;
+        ListNode* newHead = recursive(head->next);
+        head->next->next = head;
         head->next = NULL;
-        ListNode* newHead = recursive(next);
-        ListNode* curr = newHead;
-        while(curr->next)
-            curr = curr->next;
-        curr->next = head;
         return newHead;
     }
 
