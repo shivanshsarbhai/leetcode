@@ -25,17 +25,11 @@ public:
     }
 
     bool isSubtree(TreeNode* p, TreeNode* q) {
-        if(!p && !q)
-            return true;
-        
-        if((!p && q) || (p && !q))
+        if(!p)
             return false;
-        
-        if(p->val == q->val)
-        {
-            if(isSameTree(p,q))
-                return true;
-        }
+            
+        if(isSameTree(p,q))
+            return true;
 
         return isSubtree(p->left, q) || isSubtree(p->right, q);
     }
