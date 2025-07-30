@@ -7,15 +7,12 @@ public:
         unordered_set<char>s;
 
         while(right < str.length()){
-            if(s.find(str[right]) != s.end()){
-                ans = max(ans, right-left);
-                while(left <= right && s.find(str[right]) != s.end()){
-                    s.erase(str[left]);
-                    left++;
-                }
-            } else {
+            if(s.find(str[right]) == s.end()){
+                ans = max(ans, right-left+1);
                 s.insert(str[right]);
                 right++;
+            } else {
+                s.erase(str[left++]);
             }
         }
 
