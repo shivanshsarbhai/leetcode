@@ -43,7 +43,21 @@ public:
 
         return true;
     }
+
+    bool isValidBST(TreeNode* root, long min, long max){
+        if(!root)
+            return true;
+
+        if(root->val <= min || root->val >= max)
+            return false;
+
+        bool leftTree = isValidBST(root->left, min, root->val);
+        bool rightTree = isValidBST(root->right, root->val, max);
+        return leftTree && rightTree;
+    }
+
+
     bool isValidBST(TreeNode* root) {
-        return inorderApproach(root);
+        return isValidBST(root, LONG_MIN, LONG_MAX);
     }
 };
