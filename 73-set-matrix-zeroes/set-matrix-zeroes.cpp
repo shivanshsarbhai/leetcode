@@ -10,7 +10,8 @@ public:
         for(int j=0;j<m;j++)
             nums[row][j] = 0;
     }
-    void setZeroes(vector<vector<int>>& nums) {
+
+    void approach1(vector<vector<int>>&nums) {
         set<pair<int,int>>s;
         int n = nums.size();
         int m = nums[0].size();
@@ -28,5 +29,33 @@ public:
             int col = entry.second;
             makeAllZeros(nums, row, col);
         }
+    }
+
+    void optimal(vector<vector<int>>&nums){
+        int n = nums.size();
+        int m = nums[0].size();
+        vector<bool>zeroRow(n, false);
+        vector<bool>zeroCol(m, false);
+
+        for(int i=0;i<n;i++){
+            for(int j=0;j<m;j++){
+                if(nums[i][j]==0){
+                    zeroRow[i] = true;
+                    zeroCol[j] = true;
+                }
+            }
+        }
+
+        for(int i=0;i<n;i++){
+            for(int j=0;j<m;j++){
+                if(zeroRow[i] || zeroCol[j])
+                    nums[i][j]=0;
+            }
+        }
+    }
+
+    void setZeroes(vector<vector<int>>& nums) {
+        // approach1(nums);
+        optimal(nums);
     }
 };
