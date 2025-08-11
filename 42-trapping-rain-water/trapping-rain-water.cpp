@@ -31,9 +31,9 @@ public:
     int trap(vector<int>& nums) {
         int n = nums.size();
         vector<int> ngeOnLeft = findGreatestElement(nums, 0, n-1);
-        print(ngeOnLeft);
+        // print(ngeOnLeft);
         vector<int> ngeOnRight = findGreatestElement(nums, n-1, 0);
-        print(ngeOnRight);
+        // print(ngeOnRight);
         int ans = 0;
         for(int i=0;i<n;i++){
             ans += max(0, min(ngeOnLeft[i], ngeOnRight[i]) - nums[i]);
