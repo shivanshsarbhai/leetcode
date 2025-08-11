@@ -21,25 +21,41 @@ public:
         return ans;
     }
 
-    void print(vector<int>&nums){
-        cout<<"Priniting Array : ";
-        for(int num : nums)
-            cout<<num<<" ";
-        cout<<endl;
-    }
-
-    int trap(vector<int>& nums) {
+    int better(vector<int>&nums){
         int n = nums.size();
         vector<int> ngeOnLeft = findGreatestElement(nums, 0, n-1);
-        // print(ngeOnLeft);
         vector<int> ngeOnRight = findGreatestElement(nums, n-1, 0);
-        // print(ngeOnRight);
         int ans = 0;
         for(int i=0;i<n;i++){
             ans += max(0, min(ngeOnLeft[i], ngeOnRight[i]) - nums[i]);
         }
 
         return ans;
+    }
 
+    int optimal(vector<int>&nums){
+        int ans = 0;
+        int n = nums.size();
+        int left = 0;
+        int maxLeft = nums[0];
+        int right = n-1;
+        int maxRight = nums[n-1];
+
+        while(left<=right){
+            if(nums[left]<=nums[right]){
+                ans+= max(0,maxLeft - nums[left]);
+                maxLeft = max(maxLeft, nums[left++]);
+            } else{
+                ans+= max(0,maxRight - nums[right]);
+                maxRight = max(maxRight, nums[right--]);
+            }
+        }
+
+        return ans;
+    }
+
+    int trap(vector<int>& nums) {
+        // return better(nums);
+        return optimal(nums);
     }
 };
