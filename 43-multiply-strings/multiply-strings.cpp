@@ -1,19 +1,5 @@
 class Solution {
 public:
-    void equalize(string &nums1, string &nums2){
-        if(nums1.length() < nums2.length())
-            return equalize(nums2, nums1);
-        
-        int diff = nums1.length() - nums2.length();
-        string ans = "";
-
-        for(int i=0;i<diff;i++)
-            ans+="0";
-        
-        ans+=nums2;
-        nums2 = ans;
-    }
-
     string multiply(string nums1, string nums2) {
         int n = nums1.length();
         reverse(nums1.begin(), nums1.end());
