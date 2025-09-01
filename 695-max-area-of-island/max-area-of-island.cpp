@@ -1,11 +1,15 @@
 class Solution {
 public:
+
+
     void bfs(vector<vector<int>>& nums, int x, int y, vector<vector<bool>>& visited, int &area){
+            const static int dx[4] = {0,1,0,-1};
+    const static int dy[4] = {1,0,-1,0};
+
+
         visited[x][y] = true;
         queue<pair<int,int>>q;
         q.push({x,y});
-        vector<int>dx = {0,1,0,-1};
-        vector<int>dy = {1,0,-1,0};
 
         while(!q.empty()){
             pair<int,int>currCell = q.front();
