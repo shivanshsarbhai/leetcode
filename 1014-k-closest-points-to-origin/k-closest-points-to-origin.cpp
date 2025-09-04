@@ -11,20 +11,21 @@ public:
         return ans;
     }
     vector<vector<int>> kClosest(vector<vector<int>>& points, int k) {
-        priority_queue<pair<double,int>, vector<pair<double,int>>, greater<pair<double,int>>>pq;
+        priority_queue<pair<double,int>>pq;
 
         for(int i=0;i<points.size();i++){
             double dist = getDist(points[i]);
             pq.push({dist, i});
+            if(pq.size() > k) 
+                pq.pop(); // keep only k closest
         }
 
         vector<vector<int>>ans;
-        while(!pq.empty() && k>0){
+        while(!pq.empty()){
             pair<double,int>topEle = pq.top();
             pq.pop();
             int index = topEle.second;
             ans.push_back(points[index]);
-            k--;
         }
 
         return ans;
