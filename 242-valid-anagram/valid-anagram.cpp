@@ -1,33 +1,24 @@
 class Solution {
 public:
-    bool brute(string s, string t){
-        //TC : O(NlogN + MlogM)
-        sort(s.begin(), s.end());
-        sort(t.begin(), t.end());
+    bool isAnagram(string s, string t) {
+        int n = s.length();
+        int m = t.length();
 
-        return s == t;
-    }
-
-    bool better(string s, string t){
-        if(s.length() != t.length())
+        if(n!=m)
             return false;
-
-        vector<int>freq(26,0);
-        for(int i=0;i<s.length();i++){
-            freq[s[i]-'a']++;
-            freq[t[i]-'a']--;
+        
+        vector<int>freqs(26,0);
+        vector<int>freqt(26,0);
+        for(int i=0;i<n;i++){
+            freqs[s[i]-'a']++;
+            freqt[t[i]-'a']++;
         }
 
         for(int i=0;i<26;i++){
-            if(freq[i]!=0)
+            if(freqs[i]!=freqt[i])
                 return false;
         }
 
         return true;
-    }
-
-    bool isAnagram(string s, string t) {
-        // return brute(s, t);
-        return better(s,t);
     }
 };
