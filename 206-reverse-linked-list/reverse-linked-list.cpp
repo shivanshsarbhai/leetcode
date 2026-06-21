@@ -10,20 +10,14 @@
  */
 class Solution {
 public:
-    ListNode* recursive(ListNode* head){
-        if(!head || !head->next)
-            return head;
+    ListNode* reverseList(ListNode* head) {
+        ListNode* prehead = new ListNode(-1);
+        prehead->next = head;
 
-        ListNode* newHead = recursive(head->next);
-        head->next->next = head;
-        head->next = NULL;
-        return newHead;
-    }
-
-    ListNode* iterative(ListNode* head){
-        ListNode* prev = NULL;
         ListNode* curr = head;
+        ListNode* prev = NULL;
         ListNode* next = NULL;
+
         while(curr){
             next = curr->next;
             curr->next = prev;
@@ -32,11 +26,5 @@ public:
         }
 
         return prev;
-    }
-
-
-    ListNode* reverseList(ListNode* head) {
-        // return recursive(head);
-        return iterative(head);
     }
 };
