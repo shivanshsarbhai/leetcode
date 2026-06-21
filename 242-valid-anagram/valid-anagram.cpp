@@ -7,15 +7,14 @@ public:
         if(n!=m)
             return false;
         
-        vector<int>freqs(26,0);
-        vector<int>freqt(26,0);
+        vector<int>freq(26,0);
         for(int i=0;i<n;i++){
-            freqs[s[i]-'a']++;
-            freqt[t[i]-'a']++;
+            freq[s[i]-'a']++;
+            freq[t[i]-'a']--;
         }
 
         for(int i=0;i<26;i++){
-            if(freqs[i]!=freqt[i])
+            if(freq[i]!=0)
                 return false;
         }
 
