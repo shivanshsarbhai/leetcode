@@ -17,10 +17,25 @@ public:
         
         if(!root->left && !root->right)
             return root;
-        
-        TreeNode* tempNode = root->right;
-        root->right = invertTree(root->left);
-        root->left = invertTree(tempNode);
+
+        // else if(!root->left){
+        //     root->left = root->right;
+        //     root->right = NULL;
+        // }
+
+        // else if(!root->right){
+        //     root->right = root->left;
+        //     root->left = NULL;
+        // }
+
+        else{
+            TreeNode* invertedLeftTree = invertTree(root->left);
+            TreeNode* invertedRightTree = invertTree(root->right);
+            root->left = invertedRightTree;
+            root->right = invertedLeftTree;
+        }
+
         return root;
+        
     }
 };
