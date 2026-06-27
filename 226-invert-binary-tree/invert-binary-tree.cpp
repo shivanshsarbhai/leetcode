@@ -15,27 +15,9 @@ public:
         if(!root)
             return NULL;
         
-        if(!root->left && !root->right)
-            return root;
-
-        // else if(!root->left){
-        //     root->left = root->right;
-        //     root->right = NULL;
-        // }
-
-        // else if(!root->right){
-        //     root->right = root->left;
-        //     root->left = NULL;
-        // }
-
-        else{
-            TreeNode* invertedLeftTree = invertTree(root->left);
-            TreeNode* invertedRightTree = invertTree(root->right);
-            root->left = invertedRightTree;
-            root->right = invertedLeftTree;
-        }
-
+        TreeNode* tempLeft = root->left;
+        root->left = invertTree(root->right);
+        root->right = invertTree(tempLeft);
         return root;
-        
     }
 };
