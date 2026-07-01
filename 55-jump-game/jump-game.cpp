@@ -1,27 +1,37 @@
 class Solution {
 public:
     bool canJump(vector<int>& nums) {
-        if(nums.size()==1)
+        int n = nums.size();
+
+        if(n==1)
             return true;
 
-        int i=0;
-        int maxReach = nums[0];
-
-        for(;i<=maxReach;i++){
-
-            maxReach = max(maxReach, i+nums[i]);
-            // cout<<"i="<<i<<" "<<"MaxReach is : "<<maxReach<<endl;
-            if(maxReach >= nums.size()-1)
-                return true;
+        int maxFromHere = nums[0];
+        int maxFromBefore = nums[0];
+        for(int i=0;i<n;i++){
+            if(i<=maxFromBefore){
+                maxFromHere = i+nums[i];
+                maxFromBefore = max(maxFromBefore , maxFromHere);
+            }
         }
 
-        return false;
+        return maxFromBefore >= n-1;
     }
 };
 
 /*
+maxFromBefore = 2
+maxFromHere   = 2
 
-2 3 1 1 4
+i=1
+maxFromHere = 3
+maxFromBefore = 3
 
-2 3 
+i=2
+maxFromHere = 3
+maxFromBefore = 3
+
+i=3
+maxFromHere = 3
+maxFromBefore = 3
 */
