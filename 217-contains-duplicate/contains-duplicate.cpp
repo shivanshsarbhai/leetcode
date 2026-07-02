@@ -1,15 +1,19 @@
 class Solution {
 public:
-    bool containsDuplicate(vector<int>& nums) {
+    bool better(vector<int>& nums) {
+        //TC : O(N) , SC: O(N)
         unordered_set<int>s;
-        int n = nums.size();
-        for(int i=0;i<n ;i++){
-            if(s.find(nums[i])!=s.end())        
+        for(int i=0;i<nums.size();i++){
+            if(s.find(nums[i]) != s.end())
                 return true;
-            
             s.insert(nums[i]);
         }
 
         return false;
+    }
+
+    bool containsDuplicate(vector<int>& nums) {
+        //brute force would be O(n2)
+        return better(nums);
     }
 };
