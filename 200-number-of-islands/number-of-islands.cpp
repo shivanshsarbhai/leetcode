@@ -13,7 +13,7 @@ public:
         }
     }
 
-    int numIslands(vector<vector<char>>& nums) {
+    int dfs(vector<vector<char>>& nums){
         int n = nums.size();
         int m = nums[0].size();
         vector<vector<bool>> visited(n, vector<bool>(m, false));
@@ -28,5 +28,9 @@ public:
         }
 
         return count;
+    }
+    
+    int numIslands(vector<vector<char>>& nums) {
+        return dfs(nums);
     }
 };
