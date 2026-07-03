@@ -25,6 +25,7 @@ public:
     }
 
     void optimal(vector<vector<int>>&nums){
+        // TC : O(n*m) ; SC : O(1);
         bool setFirstRowZero = false;
         bool setFirstColZero = false;
         int n = nums.size();
