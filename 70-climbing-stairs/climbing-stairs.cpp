@@ -1,38 +1,18 @@
 class Solution {
 public:
-    int dpMethod(int n){
-
-        if(n<=2)
-            return n;
-            
-        vector<int>dp(n+1, 0);
-        dp[1]=1;
-        dp[2]=2;
-
-        for(int i=3;i<=n;i++)
-            dp[i] = dp[i-1]+dp[i-2];
-        
-        return dp[n];
-    }
-
-    int optimal(int n){
-        if(n<=2)
-            return n;
-        
+    int climbStairs(int n) {
         int first = 1;
         int second = 2;
-        int ans = -1;
 
+        if(n<=2)    
+            return n;
+            
         for(int i=3;i<=n;i++){
-            ans = first + second;
+            int temp = first+second;
             first = second;
-            second = ans;
+            second = temp;
         }
 
-        return ans;
-    }
-
-    int climbStairs(int n) {
-        return dpMethod(n);    
+        return second;
     }
 };
