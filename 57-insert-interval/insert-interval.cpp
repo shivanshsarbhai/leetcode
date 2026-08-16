@@ -1,38 +1,27 @@
 class Solution {
 public:
-
-    vector<vector<int>> mergeOverlappingIntervals(vector<vector<int>>& nums) {
-        sort(nums.begin(), nums.end());
-        int n = nums.size();
+    vector<vector<int>> insert(vector<vector<int>>& nums, vector<int>& newInterval) {
         vector<vector<int>>ans;
-        ans.push_back(nums[0]);
-        int index = 0;
-        for(int i=1;i<n;i++){
-            int prevStart = ans[index][0];
-            int prevEnd = ans[index][1];
-            int start = nums[i][0];
-            int end = nums[i][1];
+        int n = nums.size();
+        int i = 0;
+        while(i<n && nums[i][1] < newInterval[0]){
+            ans.push_back(nums[i]);
+            i++;
+        }
 
-            if(start > prevEnd){
-                ans.push_back(nums[i]);
-                index++;
-            }
-            else{
-                ans[index][0] = min(ans[index][0], start);
-                ans[index][1] = max(ans[index][1], end);
-            }
+        while(i<n && nums[i][0]<=newInterval[1]){
+            newInterval[0] = min(newInterval[0], nums[i][0]);
+            newInterval[1] = max(newInterval[1], nums[i][1]);
+            i++;
+        }
+
+        ans.push_back(newInterval);
+
+        while(i<n){
+            ans.push_back(nums[i]);
+            i++;
         }
 
         return ans;
-    }
-
-    vector<vector<int>> insert(vector<vector<int>>& nums, vector<int>& newInterval) {
-        int n = nums.size();
-        int i = 0;
-        while(i<n && nums[i][0] <= newInterval[0])  
-            i++;
-        
-        nums.insert(nums.begin()+i, newInterval);
-        return mergeOverlappingIntervals(nums);
     }
 };
