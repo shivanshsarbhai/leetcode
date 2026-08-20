@@ -1,40 +1,41 @@
 class Solution {
 public:
     string longestPalindrome(string s) {
-        int ans = 0;
         int n = s.length();
-        int ansStart = 0;
-        int ansEnd = 0;
+        int maxLeft = 0;
+        int maxRight = 0;
+
+        int ans = 0;
         for(int i=0;i<n;i++){
-            int left = i;
-            int right = i;
-            while(left>=0 && right<n && s[left]==s[right]){
-                if(right-left+1 > ans){
-                    ans = right-left+1;
-                    ansStart = left;
-                    ansEnd = right;
-                }
+            //Assuming that ith element is the middle most element with odd length
+            int left = i-1;
+            int right = i+1;
+            while(left>=0 && right < n && s[left]==s[right]){
                 left--;
                 right++;
             }
 
+            if(ans < right-left-1){
+                maxLeft = left+1;
+                maxRight = right-1;
+                ans = max(ans, right-left-1);
+            }
+
             left = i;
             right = i+1;
-            while(left>=0 && right<n && s[left]==s[right]){
-                if(right-left+1 > ans){
-                    ans = right-left+1;
-                    ansStart = left;
-                    ansEnd = right;
-                }
+            while(left>=0 && right < n && s[left]==s[right]){
                 left--;
                 right++;
-            }         
+            }
+
+            if(ans < right-left-1){
+                maxLeft = left+1;
+                maxRight = right-1;
+                ans = max(ans, right-left-1);
+            }
         }
 
-        string res = "";
-        for(int i=ansStart;i<=ansEnd;i++)
-            res+=s[i];
 
-        return res;
+        return s.substr(maxLeft, ans);
     }
 };
