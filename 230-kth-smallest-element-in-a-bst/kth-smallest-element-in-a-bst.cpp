@@ -11,22 +11,19 @@
  */
 class Solution {
 public:
-    void getInorder(TreeNode* root, vector<int>&inorder){
+    void inorder(TreeNode* root, vector<int>&ans){
         if(!root)
             return;
-
-        getInorder(root->left, inorder);
-        inorder.push_back(root->val);
-        getInorder(root->right, inorder);
-    }
-
-    int inorderApproach(TreeNode* root, int k){
-        vector<int>inorder = {};
-        getInorder(root, inorder);
-        return inorder[k-1];
+        
+        inorder(root->left, ans);
+        ans.push_back(root->val);
+        inorder(root->right, ans);
     }
 
     int kthSmallest(TreeNode* root, int k) {
-        return inorderApproach(root, k);
+        //inorder traversal of BST is sorted 
+        vector<int>ans;
+        inorder(root, ans);
+        return ans[k-1];
     }
 };
